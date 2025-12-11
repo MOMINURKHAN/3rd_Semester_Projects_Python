@@ -1,0 +1,36 @@
+body {
+    background-color:powderblue;
+    background-image: url(coffee_shop.jpg);
+    background-repeat:no-repeat;
+    background-size: cover ;
+}
+h1{
+    color:blue;
+    font-family : Verdana, Geneva, Tahoma, sans-serif;
+    font-size : 300%;
+}
+h2 {
+    color : whitesmoke;
+    
+}
+p {
+    color :red;
+    font-family : courier;
+    font-size : 100%;
+    border : 2px solid black;
+    padding : 10px;
+    margin : 10px;
+    
+}
+a {
+    color:aquamarine;
+}
+img {
+    margin: 30px;
+    border : solid skyblue 50px ;
+    
+}
+pre {
+    background-color: powderblue;
+    color : brown;
+}
