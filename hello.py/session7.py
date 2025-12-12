@@ -1,42 +1,52 @@
-#brain activation part
+class BankAccount:
+    def __init__(self,owner,balance,acc_num = 'A1312432'):
+        self.owner = owner
+        self.balance = balance
+        self.acc_num = acc_num
+        self.transection = []
+    def input_validation(self,amount):
+        if amount<=0:
+            raise ValueError("Amount must be positive")
+        return True
 
-car = {"make":"Toyota" , "model":"Corolla", "year":2020}
+    def deposit(self,amount):
+        if self.input_validation(amount):
+            self.balance += amount
+            self.transection.append(('deposit',amount))
+            print(f'Account holder :  {self.owner}Deposited : {amount}. New Balance {self.balance}')
+        return False
+    def Withdraw(self,amount):
+        if self.input_validation(amount):
+            if amount>self.balance:
+                print(f"withdraw request of {amount} is more than actual account balance {self.balance}")
 
-print(car)
+            self.balance-=amount
+            self.transection.append(('withdraw',amount))
+            print(f"{self.owner} Withdrawl {amount}. New Balance {self.balance}")
+            return True
+        return False
+    def show(self):
+        print(f"{self.acc_num} : {self.owner} : {self.balance}")
+    def transfer(self,amount,reciever_account):
+        if self.Withdraw(amount):
+            reciever_account.deposit(amount)
+            reciever_account.transection.append(('transfer=in',amount,self.acc_num))
+            print(f"transferred : {amount} to {reciever_account.owner}")
+            return True 
+        return False
+    def show_transection(self):
+        print(f"Transection history for {self.owner}")
+        for transection in self.transection:
+            print(f"    -{transection}"
+                  )
+        
 
-car["Motorcycle"] = "Harley Davidson"
-for key,value in car.items():
-    print(key,"Hello",value)
-
-#lion 
-# - 
-#pen - it has ink and a good shaped body for convenient use
-# writing mostly then drawing and sometimes fighting 
-# normally release the ink according to the users use and also finish releasing when there's nothing left .
-class Student:
-    def __init__(self,Name,Major):
-        self.Name = Name
-        self.Major = Major
-        self.Credit = 55
-    def Introduce(self):
-        print("Hi,I am",self.Name,"I'm studying in the major :",self.Major)
-        print("Credit is :",self.Credit)
-    def update_credits(self, new_value):
-        if new_value>210 or new_value<0:
-            print("It's not valid change it it should follow 0<credit<210")
-        else:
-            self.Credit = new_value;
-
-s1 = Student("Jenniffer","Weapon Enginnering")
-
-s2 = Student("Ricky","Communication Engineering")
-
-s3 = Student("mike","Mining Technology")
-
-Student_list = [s1,s2]
-Student_list.append(s3)
-for p in Student_list:
-    if p==s1:
-        s1.update_credits(34)
-    p.Introduce()
     
+Account_A = BankAccount('Prattoy_vai',5000,'A2352BY988')
+Account_B = BankAccount('Hashitha',3500,'H24523243')
+Account_A.deposit(3000)
+Account_A.Withdraw(1300)
+Account_A.show()
+Account_A.transfer(int(input("Enter the amount you want to transfer :")),Account_B)
+Account_A.show()
+Account_B.show()
