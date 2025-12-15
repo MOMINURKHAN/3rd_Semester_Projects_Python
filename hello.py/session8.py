@@ -1,74 +1,59 @@
-# # def greet(name):
-# #     print(f"Hello,{name}")
+class Animal:
+    def __init__(self, name, species, age):
+        self.name = name
+        self.species = species
+        self.age = age
 
-# # greet("MOMINUR")
-
-# # fruits = {"Apples","Banana","Pear"}
-
-# # for fuit in fruits:
-# #     print(f"Hey")
-
-
-
-# def checkingthelarge(num1,num2):
-#     if num1 > num2:
-#         return num1
-#     elif num1 == num2:
-#         print("they are equal ")
-#         return "you're a  fool"
-#     else:
-#         return num2
-
-
-# print("Write two number to compare which one is big")
-# a = int(input("Write a number : "))
-# b = int(input("Write a number : "))
-# # x = checkingthelarge(a,b)
-# # print("The large number is ",x)
-
-class Vehicle():
-    def __init__(self, make, model, year):
-        self.make = make
-        self.model = model
-        self.year = year
-    def describe(self):
-        print(f"{self.year} {self.make} {self.model}")
-     
-
-class GasolineVehicle(Vehicle):
-    def __init__(self, make, model, year,tank_size):
-        super().__init__(make, model, year)
-        self.tank_size = tank_size
-    def describe(self):
-        print(f"{self.year} {self.make} {self.model} {self.tank_size}")
-        
-class ElectricVehicle(Vehicle):
-    def __init__(self, make, model, year, battery_capacity):
-        super().__init__(make, model, year)
-        self.battery = Battery(battery_capacity)
-    def describe(self):
-        print(f"{self.year} {self.make} {self.model} {self.battery.show_range()}")
-
-
-class Battery():
-    def __init__(self,battery):
-        self.battery = battery
+    def make_sound(self):
+        print("Some generic animal sound")
     
-    def show_range(battery):
-        print("The battery range : ")
-        if battery == 20000:
-            print("it can go approx 300km")
-        else:
-            print("Ask someone I don't know")
+#task 1
+class Mammals(Animal):
+    def __init__(self, name, species, age,fur_colour,sound):
+        super().__init__(name, species, age)
+        self.fur_colour = fur_colour
+        self.sound = sound
+    def make_sound(self):
+        print(f"{self.name} is a Mammal and  make {self.sound}")
 
-print("Gasoline vehicle : -> ")
-vehicle1 = GasolineVehicle("Whatever","Suzuki",2500,"25Ltr")
-vehicle1.describe()
+class Birds(Animal):
+    def __init__(self, name, species, age,wing_span,sound):
+        super().__init__(name, species, age)
+        self.wing_span = wing_span
+        self.sound = sound
+        
+    def make_sound(self):
+        print(f"{self.name} is a bird and  make {self.sound} ")
+class Zoo:
+    def __init__(self):
+        self.animals = []
+    def add_animal(self,animal):
+        self.animals.append(animal)
+    def show_all(self):
+        for a in self.animals:
+            print(f"{a.name} speices : {a.species}")
 
-print("Electronic vehicle : -> ")
-vehicle2 = ElectricVehicle("Idk","bazzaj","2000","25000mah")
-vehicle2.describe()
+class Keeper():
+    def __init__(self,name):
+        self.name = name
 
-print("Vehicle : -> ")
-vehicle3 = Vehicle("Idk","Yamaha",1999)
-vehicle3.describe()
+    def feed_all(self,zoo):
+        for i in zoo.animals:
+            print(f'{self.name} feeding {i.name}')
+
+
+Cow = Mammals('Cow','Red-Bull',3,'Red','hamba-hamba')
+Cow.make_sound()
+Parrot =Birds('Rose','Chinese',2,6,'chickir chikir')
+Parrot.make_sound()
+
+zoo_animal = Zoo()
+zoo_animal.add_animal(Cow)
+zoo_animal.add_animal(Parrot)
+
+for a in zoo_animal.animals:    
+    a.make_sound()
+
+keeper_haren_ken = Keeper('haren ken')
+keeper_haren_ken.feed_all(zoo_animal)
+zoo_animal.show_all()
